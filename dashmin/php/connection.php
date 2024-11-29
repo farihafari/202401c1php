@@ -1,6 +1,6 @@
 <?php
-$server = "mysql:host=localhost;dbname=pr2020401c1";
+$server = "mysql:host=localhost;dbname=pr2202401c1";
 $username="root";
 $password = "";
-
+$pdo = new PDO($server,$username,$password);
 ?>
