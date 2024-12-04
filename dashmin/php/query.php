@@ -1,6 +1,6 @@
 <?php
 include("connection.php");
-
+$catImageAddress = 'img/categories/';
 
 
 // category add
@@ -24,4 +24,5 @@ if(move_uploaded_file($imageObject,$pathDirectory)){
     echo "<script>alert('invalid file type use only jpeg,png,jpg or webp')</script>";
    }
 }
+
 ?>
