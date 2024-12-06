@@ -114,15 +114,39 @@ include("components/header.php");
             <div class="modal-body">
                 <form method="post" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Category Name</label>
+                        <label for="exampleInputEmail1" class="form-label">Product Name</label>
                         <input type="text" name="catName" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Category Image</label>
+                        <label for="exampleInputEmail1" class="form-label">Product Price</label>
+                        <input type="text" name="catName" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Product Quantity</label>
+                        <input type="text" name="catName" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Product Image</label>
                         <input type="file" name="catImage" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Product   <select class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                             
                     </div>
 
                     <button type="submit" name="AddCategory" class="btn btn-primary">Add Category</button>
