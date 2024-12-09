@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2024 at 08:55 AM
+-- Generation Time: Dec 09, 2024 at 08:59 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,7 +39,25 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`, `image`) VALUES
 (1, 'fashion', 'futuristic-red-blue-abstract-gaming-600nw-1916887910.webp'),
-(2, 'mobile', 'plant2.jpeg');
+(2, 'mobile', 'plant2.jpeg'),
+(3, 'electronic', 'user.jpg'),
+(4, 'fashion', 'testimonial-1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `productId` int(11) NOT NULL,
+  `productName` varchar(30) NOT NULL,
+  `productPrice` int(11) NOT NULL,
+  `productQuantity` int(11) NOT NULL,
+  `productImage` varchar(150) NOT NULL,
+  `productDesciption` varchar(200) NOT NULL,
+  `productCatId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -52,6 +70,13 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`productId`),
+  ADD KEY `productCatId` (`productCatId`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -59,7 +84,23 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`productCatId`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
