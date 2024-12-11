@@ -136,14 +136,14 @@ include("components/header.php");
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Product Price</label>
-                        <input type="text" name="proName" class="form-control" id="exampleInputEmail1"
+                        <input type="text" name="proPrice" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Product Quantity</label>
-                        <input type="text" name="proName" class="form-control" id="exampleInputEmail1"
+                        <input type="text" name="proQuantity" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">
                         </div>
@@ -154,7 +154,7 @@ include("components/header.php");
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Product Description</label>
-                        <textarea class="form-control" name="proDescription" placeholder="Leave a comment here"
+                        <textarea class="form-control" name="proDescription" 
                                     id="floatingTextarea" style="height: 150px;"></textarea>
                     </div>
                     <div class="mb-3">
