@@ -1,6 +1,8 @@
 <?php
 include("connection.php");
 $catImageAddress = 'img/categories/';
+$proImageAddress = 'img/products/';
+
 
 
 // category add

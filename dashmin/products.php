@@ -17,27 +17,37 @@ include("components/header.php");
 
                     <tr>
 
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
+                        <th scope="col">Product Image</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Product Price</th>
+                        <th scope="col">Product Quantity</th>
+                        <th scope="col">Product Description</th>
+                        <th scope="col">Product Category</th>
                         <th scope="col" colspan="2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-    $query = $pdo->query("select * from categories");
+    $query = $pdo->query("SELECT `products`.*, `categories`.`name` 
+FROM `products` 
+	inner JOIN `categories` ON `products`.`productCatId` = `categories`.`id`;");
     $rows = $query->fetchAll(PDO::FETCH_ASSOC);
   foreach($rows as $keys){
     ?>
                     <tr>
-                        <th scope="row"><img src="<?php echo $catImageAddress.$keys['image']?>" alt="" srcset=""
+                        <th scope="row"><img src="<?php echo $proImageAddress.$keys['productImage']?>" alt="" srcset=""
                                 width="80"></th>
+                        <td><?php echo $keys['productName'] ?></td>
+                        <td><?php echo $keys['productPrice'] ?></td>
+                        <td><?php echo $keys['productQuantity'] ?></td>
+                        <td><?php echo $keys['productDesciption'] ?></td>
                         <td><?php echo $keys['name'] ?></td>
                         <td>
                             <a href="" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#ModelUpdate<?php echo $keys['id']?>">Edit</a>
+                                data-bs-target="#ModelUpdate<?php echo $keys['productId']?>">Edit</a>
                         </td>
                         <td><a href="" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#ModelDelete<?php echo $keys['id']?>">Delete</a></td>
+                                data-bs-target="#ModelDelete<?php echo $keys['productId']?>">Delete</a></td>
                     </tr>
 
 
