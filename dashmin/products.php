@@ -44,70 +44,101 @@ FROM `products`
                         <td><?php echo $keys['name'] ?></td>
                         <td>
                             <a href="" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#ModelUpdate<?php echo $keys['productId']?>">Edit</a>
+                                data-bs-target="#updateproduct<?php echo $keys['productId']?>">Edit</a>
                         </td>
                         <td><a href="" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#ModelDelete<?php echo $keys['productId']?>">Delete</a></td>
                     </tr>
 
 
-                    <!--Update category Modal -->
-                    <div class="modal fade" id="ModelUpdate<?php echo $keys['id']?>" data-bs-backdrop="static"
-                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Update Category</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="post" enctype="multipart/form-data">
-                                        <input type="hidden" name="catId" value="<?php echo $keys['id']?>">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Category Name</label>
-                                            <input type="text" name="catName" value="<?php echo $keys['name']?>"
-                                                class="form-control" id="exampleInputEmail1"
-                                                aria-describedby="emailHelp">
-                                            <div id="emailHelp" class="form-text">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Category Image</label>
-                                            <input type="file" name="catImage" class="form-control "
-                                                id="exampleInputPassword1">
-                                            <img class="mt-3" src="<?php echo  $catImageAddress.$keys['image']?>"
-                                                width="90" alt="">
-                                        </div>
-
-                                        <button type="submit" name="UpdateCategory" class="btn btn-primary">Update
-                                            Category</button>
-                                    </form>
-                                </div>
-
-                            </div>
+                    <!--Update product Modal -->
+                    <div class="modal fade" id="updateproduct<?php echo $keys['productId'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="proId" value="<?php echo $keys['productId'] ?>">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Product Name</label>
+                        <input type="text" name="proName" value="<?php echo $keys['productName'] ?>" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">
                         </div>
                     </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Product Price</label>
+                        <input type="text" name="proPrice" value="<?php echo $keys['productPrice'] ?>" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Product Quantity</label>
+                        <input type="text" name="proQuantity" value="<?php echo $keys['productQuantity'] ?>" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Product Image</label>
+                        <input type="file" name="proImage" class="form-control" id="exampleInputPassword1">
+                        <img src="<?php echo $proImageAddress.$keys['productImage']?>" alt="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Product Description</label>
+                        <textarea class="form-control"  name="proDescription" 
+                                    id="floatingTextarea" style="height: 150px;"><?php echo $keys['productDesciption'] ?></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label pt-3">Product Categories </label>
+                        <select class="form-select" id="floatingSelect" name="proCatId" aria-label="Floating label select example">
+                            <option hidden>Select Anyone Category</option>
+                            <?php
+                                    $query = $pdo->query("select * from categories");
+                                    $row=$query->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach($row as $catkeys){
+                                        ?>
+                                         <option value="<?php echo $catkeys['id']?>" <?=$keys['productCatId']==$catkeys['id']?'selected':''?>><?php echo $catkeys['name'] ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                          
+                        </select>
+
+                    </div>
+
+                    <button type="submit" name="UpdateProduct" class="btn btn-primary">Update Product</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
                     <!--Update category Modal -->
 
                     <!-- delete -->
                     <!-- category Modal -->
-                    <div class="modal fade" id="ModelDelete<?php echo $keys['id']?>" data-bs-backdrop="static"
+                    <div class="modal fade" id="ModelDelete<?php echo $keys['productId']?>" data-bs-backdrop="static"
                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Add Category</h5>
+                                    <h5 class="modal-title" id="staticBackdropLabel">Delete Products</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <form method="post" enctype="multipart/form-data">
 
-                                        <input type="hidden" name="catId" value="<?php echo $keys['id']?>">
+                                        <input type="hidden" name="productId" value="<?php echo $keys['productId']?>">
 
-                                        <button type="submit" name="DeleteCategory" class="btn btn-primary">Delete
-                                            Category</button>
+                                        <button type="submit" name="DeleteProduct" class="btn btn-primary">Delete
+                                            Products</button>
                                     </form>
                                 </div>
 
