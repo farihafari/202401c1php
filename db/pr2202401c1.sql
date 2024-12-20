@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2024 at 08:59 AM
+-- Generation Time: Dec 20, 2024 at 08:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,10 +38,12 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `image`) VALUES
-(1, 'fashion', 'futuristic-red-blue-abstract-gaming-600nw-1916887910.webp'),
-(2, 'mobile', 'plant2.jpeg'),
-(3, 'electronic', 'user.jpg'),
-(4, 'fashion', 'testimonial-1.jpg');
+(1, 'footwear fashions', 'download (19).jpg'),
+(2, 'bags', 'download (14).jpg'),
+(3, 'abbayas', 'images.jpg'),
+(4, 'watches', 'download.jpg'),
+(5, 'women fashions', 'EMLNET-1_0026_AKS04329_360x.webp'),
+(6, 'men fashions', 'cap_1.webp');
 
 -- --------------------------------------------------------
 
@@ -84,13 +86,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
