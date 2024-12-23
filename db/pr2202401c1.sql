@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2024 at 08:56 AM
+-- Generation Time: Dec 23, 2024 at 08:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,6 +62,16 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`productId`, `productName`, `productPrice`, `productQuantity`, `productImage`, `productDesciption`, `productCatId`) VALUES
+(4, 'time check watch', 3500, 5, 'download (1).jpg', 'ghfhrtyirioior', 4),
+(5, 'nike shoes', 5000, 5, 'download (15).jpg', 'dfgvdhrfutyut7i7u', 1),
+(6, 'women footwear fashion', 5550, 8, 'download (18).jpg', 'FGYJGHGUJTYU', 1),
+(7, 'slik abbaya', 12000, 9, 'download (8).jpg', 'gtyhtujhyty', 3);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -92,7 +102,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
