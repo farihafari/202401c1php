@@ -105,6 +105,9 @@ include('auth/auth.php')
 							<li>
 								<a href="contact.html">Contact</a>
 							</li>
+							<li>
+								<a href="register.php">Sign Up</a>
+							</li>
 						</ul>
 					</div>	
 
