@@ -108,6 +108,12 @@ include('auth/auth.php')
 							<li>
 								<a href="register.php">Sign Up</a>
 							</li>
+							<li>
+								<a href="login.php">Sign In</a>
+							</li>
+							<li>
+								<a href="logout.php">logout</a>
+							</li>
 						</ul>
 					</div>	
 

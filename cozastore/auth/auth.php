@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("connection.php");
 $catAddress = "../dashmin/img/categories/";
 $proAddress = "../dashmin/img/products/";
@@ -19,5 +20,33 @@ if(isset($_POST['Rgisteration'])){
 
 
 }
-
+// login
+if(isset($_POST['Login'])){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $query = $pdo ->prepare("select * from users where user_email = :ue");
+    $query->bindParam("ue",$email);
+    $query->execute();
+    $row = $query->fetch(PDO::FETCH_ASSOC);
+    // var_dump($row);
+    if(password_verify($password,$row['user_password'])){
+       $_SESSION['userId']= $row['user_id'];
+       $_SESSION['userName']= $row['user_name'];
+       $_SESSION['userEmail']= $row['user_email'];
+       $_SESSION['userPassword']= $row['user_password'];
+       $_SESSION['userNumber']= $row['user_phone'];
+       $_SESSION['userType']= $row['user_role_type'];
+if($_SESSION['userType']=="user"){
+    echo "<script>
+    alert('logged in user successfully');
+    location.assign('index.php')
+    </script>";
+}else{
+    echo "<script>
+    alert('logged in admin successfully');
+    location.assign('../dashmin/index.php');
+    </script>";
+}
+    }
+}
 ?>

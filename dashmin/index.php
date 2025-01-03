@@ -1,5 +1,11 @@
 <?php
 include("components/header.php");
+if($_SESSION['userType']!="admin"){
+    echo "<script>
+    alert('only admin can access');
+    location.assign('../cozastore/index.php')
+    </script>";
+}
 ?>
 
 
