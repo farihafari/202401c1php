@@ -1,5 +1,6 @@
 <?php
 session_start();
+// session_unset();
 include("connection.php");
 $catAddress = "../dashmin/img/categories/";
 $proAddress = "../dashmin/img/products/";
@@ -49,4 +50,28 @@ if($_SESSION['userType']=="user"){
 }
     }
 }
+// add to cart
+if(isset($_POST['AddToCart'])){
+    $pId = $_POST['proId'];
+    $pName = $_POST['proName'];
+    $pQuantity = $_POST['proQuantity'];
+    $pPrice = $_POST['proPrice'];
+    $pImage = $_POST['proImage'];
+if(isset($_SESSION['cart'])){
+
+}else{
+    $_SESSION['cart'][0]=array(
+                                "proId"=>$pId,
+                                "proName"=>$pName,
+                                "proImage"=>$pImage,
+                                "proPrice"=>$pPrice,
+                                "proQuantity"=>$pQuantity
+                            );
+                            echo "<script>
+                            alert('product add into cart');
+                            </script>";
+}
+
+}
+
 ?>
