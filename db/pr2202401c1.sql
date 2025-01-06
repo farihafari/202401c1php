@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2025 at 07:31 AM
+-- Generation Time: Jan 06, 2025 at 08:47 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -48,6 +48,45 @@ INSERT INTO `categories` (`id`, `name`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `invoices`
+--
+
+CREATE TABLE `invoices` (
+  `invoiceId` int(11) NOT NULL,
+  `userName` varchar(30) NOT NULL,
+  `userEmail` varchar(100) NOT NULL,
+  `totalProductQuantity` int(11) NOT NULL,
+  `subtotal` int(11) NOT NULL,
+  `invoiceDate` date NOT NULL,
+  `invoiceTime` time NOT NULL,
+  `userPhone` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `orderId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `userEmail` varchar(100) NOT NULL,
+  `userPhone` varchar(15) NOT NULL,
+  `userAddress` varchar(200) NOT NULL,
+  `userName` varchar(30) NOT NULL,
+  `productName` varchar(30) NOT NULL,
+  `productPrice` int(11) NOT NULL,
+  `productQuantity` int(11) NOT NULL,
+  `productImage` varchar(200) NOT NULL,
+  `orderDate` date NOT NULL,
+  `orderTime` time NOT NULL,
+  `orderStatus` varchar(20) NOT NULL DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -71,6 +110,30 @@ INSERT INTO `products` (`productId`, `productName`, `productPrice`, `productQuan
 (6, 'women footwear fashion', 5550, 8, 'download (18).jpg', 'FGYJGHGUJTYU', 1),
 (7, 'slik abbaya', 12000, 9, 'download (8).jpg', 'gtyhtujhyty', 3);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(30) NOT NULL,
+  `user_email` varchar(100) NOT NULL,
+  `user_password` varchar(200) NOT NULL,
+  `user_phone` varchar(11) NOT NULL,
+  `user_role_type` varchar(30) NOT NULL DEFAULT 'user'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_password`, `user_phone`, `user_role_type`) VALUES
+(1, 'fariha', 'fareehajabeen62@gmail.com', '$2y$10$hJlmcXUohIhtHiTciWQhO.RgJpBOgzX7eNGwK63zyzhqO3xniBlYu', '03052563576', 'user'),
+(2, 'ADMIN', 'admin@gmail.com', '$2y$10$ssHaVLLjyjtR9T0k5SgKKO6vqgZrw7xTn2UhKQf/Mns3tsSbJtiqS', '03152545748', 'admin'),
+(3, 'kinza', 'kinza@gmail.cm', '$2y$10$ezy5rdMLiJKTfmiSOrFUquIGjgr.w1P1wvpmXlYCDdUlJ6n4yiaru', '03154748946', 'user');
+
 --
 -- Indexes for dumped tables
 --
@@ -82,11 +145,29 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`invoiceId`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`orderId`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`productId`),
   ADD KEY `productCatId` (`productCatId`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -99,10 +180,28 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `invoices`
+--
+ALTER TABLE `invoices`
+  MODIFY `invoiceId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
