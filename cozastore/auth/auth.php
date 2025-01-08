@@ -58,6 +58,32 @@ if(isset($_POST['AddToCart'])){
     $pPrice = $_POST['proPrice'];
     $pImage = $_POST['proImage'];
 if(isset($_SESSION['cart'])){
+    $checkData = false;
+foreach($_SESSION['cart'] as $keys => $values){
+if($values['proId']==$pId){
+   $_SESSION['cart'][$keys]['proQuantity'] +=$pQuantity;
+   echo "<script>
+   alert('Quantity added');
+   </script>";
+    $checkData = true;
+}
+}
+if(!$checkData){
+
+        $count = count($_SESSION['cart']);
+    //    echo "<script>alert('".$count."')</script>";
+    $_SESSION['cart'][$count] =array(
+        "proId"=>$pId,
+        "proName"=>$pName,
+        "proImage"=>$pImage,
+        "proPrice"=>$pPrice,
+        "proQuantity"=>$pQuantity
+    );
+    echo "<script>
+    alert('product add into cart');
+    </script>";
+    
+}
 
 }else{
     $_SESSION['cart'][0]=array(
@@ -73,5 +99,18 @@ if(isset($_SESSION['cart'])){
 }
 
 }
-
+// delete cart item
+if(isset($_GET['remove'])){
+    $pid = $_GET['remove'];
+    foreach($_SESSION['cart'] as $keys => $values){
+        if($values['proId']==$pid){
+            unset($_SESSION['cart'][$keys]);
+            $_SESSION['cart']=array_values($_SESSION['cart']);
+            echo "<script>
+            alert('item remove from cart');
+            location.assign('shoping-cart.php');
+            </script>";
+        }
+    }
+}
 ?>
