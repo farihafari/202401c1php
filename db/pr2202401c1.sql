@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2025 at 08:47 AM
+-- Generation Time: Jan 10, 2025 at 08:37 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -56,11 +56,19 @@ CREATE TABLE `invoices` (
   `userName` varchar(30) NOT NULL,
   `userEmail` varchar(100) NOT NULL,
   `totalProductQuantity` int(11) NOT NULL,
+  `itemCount` int(11) NOT NULL,
   `subtotal` int(11) NOT NULL,
   `invoiceDate` date NOT NULL,
   `invoiceTime` time NOT NULL,
   `userPhone` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `invoices`
+--
+
+INSERT INTO `invoices` (`invoiceId`, `userName`, `userEmail`, `totalProductQuantity`, `itemCount`, `subtotal`, `invoiceDate`, `invoiceTime`, `userPhone`) VALUES
+(1, 'fariha', 'fareehajabeen62@gmail.com', 3, 2, 12000, '2025-01-10', '12:31:06', '03052563576');
 
 -- --------------------------------------------------------
 
@@ -78,11 +86,20 @@ CREATE TABLE `orders` (
   `productName` varchar(30) NOT NULL,
   `productPrice` int(11) NOT NULL,
   `productQuantity` int(11) NOT NULL,
+  `productTotal` int(11) NOT NULL,
   `productImage` varchar(200) NOT NULL,
   `orderDate` date NOT NULL,
   `orderTime` time NOT NULL,
   `orderStatus` varchar(20) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orderId`, `userId`, `userEmail`, `userPhone`, `userAddress`, `userName`, `productName`, `productPrice`, `productQuantity`, `productTotal`, `productImage`, `orderDate`, `orderTime`, `orderStatus`) VALUES
+(1, 1, 'fareehajabeen62@gmail.com', '03052563576', 'karachi\r\n', 'fariha', 'nike shoes', 5000, 1, 5000, 'download (15).jpg', '2025-01-10', '12:31:06', 'pending'),
+(2, 1, 'fareehajabeen62@gmail.com', '03052563576', 'karachi\r\n', 'fariha', 'time check watch', 3500, 2, 7000, 'download (1).jpg', '2025-01-10', '12:31:06', 'pending');
 
 -- --------------------------------------------------------
 
@@ -154,7 +171,8 @@ ALTER TABLE `invoices`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`orderId`);
+  ADD PRIMARY KEY (`orderId`),
+  ADD KEY `userId` (`userId`);
 
 --
 -- Indexes for table `products`
@@ -183,13 +201,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `invoiceId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `invoiceId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -206,6 +224,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `products`

@@ -113,4 +113,58 @@ if(isset($_GET['remove'])){
         }
     }
 }
+//  order palce
+if(isset($_POST['orderPlace'])){
+    $uid = $_SESSION['userId'];
+    $uname = $_POST['name'];
+    $uemail = $_POST['email'];
+    $unumber = $_POST['number'];
+    $uaddress = $_POST['address'];
+    date_default_timezone_set("Asia/Karachi");
+    $currentTime = time();
+    $date = date("Y-m-d H:i:s",$currentTime);
+    $time = date("H:i:s",strtotime($date));
+    // echo "<script>alert('".$time."')</script>";
+    $total = 0;
+    $productQuantity = 0;
+    $itemCount =1;
+    $subTotal = 0;
+    foreach($_SESSION['cart'] as $key => $val){
+$productQuantity += $val['proQuantity'];
+$itemCount += $key; 
+
+        $total = $val['proQuantity']*$val['proPrice'];
+        $subTotal +=$total;
+        $query = $pdo ->prepare("INSERT INTO `orders`( `userId`, `userEmail`, `userPhone`, `userAddress`, `userName`, `productName`, `productPrice`, `productQuantity`, `productTotal`, `productImage`, `orderDate`, `orderTime`) VALUES(:ui,:ue,:up,:ua,:un,:pn,:pp,:pq,:pt,:pi,:od,:ot)");
+        $query->bindParam("ui",$uid);
+        $query->bindParam("ue",$uemail);
+        $query->bindParam("up",$unumber);
+        $query->bindParam("ua",$uaddress);
+        $query->bindParam("un",$uname);
+        $query->bindParam("pn",$val['proName']);
+        $query->bindParam("pp",$val['proPrice']);
+        $query->bindParam("pq",$val['proQuantity']);
+        $query->bindParam("pt",$total);
+        $query->bindParam("pi",$val['proImage']);
+        $query->bindParam("od",$date);
+        $query->bindParam("ot",$time);
+
+$query->execute();
+    }
+
+$queryInvoivce = $pdo->prepare("INSERT INTO `invoices`( `userName`, `userEmail`, `totalProductQuantity`, `itemCount`, `subtotal`, `invoiceDate`, `invoiceTime`, `userPhone`) VALUES(:inn,:ie,:tpq,:ic,:sb,:dd,:dt,:ip)");
+$queryInvoivce->bindParam("inn",$uname);
+$queryInvoivce->bindParam("ie",$uemail);
+$queryInvoivce->bindParam("tpq",$productQuantity);
+$queryInvoivce->bindParam("ic",$itemCount);
+$queryInvoivce->bindParam("sb",$subTotal);
+$queryInvoivce->bindParam("dd",$date);
+$queryInvoivce->bindParam("dt",$time);
+$queryInvoivce->bindParam("ip",$unumber);
+$queryInvoivce->execute();
+ unset($_SESSION['cart']);
+    echo "<script>alert('order placed successfully');
+    location.assign('index.php');
+    </script>";
+}
 ?>
